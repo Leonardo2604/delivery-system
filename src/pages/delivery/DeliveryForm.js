@@ -62,11 +62,26 @@ function DeliveryForm() {
             && longitudeDeparture <= 180
         ) {
             const address = await GoogleMapsApiService.fromLatLng(googleMapsApiKey, latitudeDeparture, longitudeDeparture);
-            setStreetDeparture(address.street);
-            setNumberDeparture(address.number);
-            setNeighborhoodDeparture(address.neighborhood);
-            setCityDeparture(address.city);
-            setZipCodeDeparture(address.zipCode);
+            if (address.street !== '') {
+                setStreetDeparture(address.street);
+            }
+
+            if (address.number !== '') {
+                setNumberDeparture(address.number);
+            }
+
+            if (address.neighborhood !== '') {
+                setNeighborhoodDeparture(address.neighborhood);
+            }
+
+            if (address.city !== '') {
+                setCityDeparture(address.city);
+            }
+
+            if (address.zipCode !== '') {
+                setZipCodeDeparture(address.zipCode);
+            }
+
         }
     }
 
@@ -80,11 +95,26 @@ function DeliveryForm() {
             && longitudeDestination <= 180
         ) {
             const address = await GoogleMapsApiService.fromLatLng(googleMapsApiKey, latitudeDestination, longitudeDestination);
-            setStreetDestination(address.street);
-            setNumberDestination(address.number);
-            setNeighborhoodDestination(address.neighborhood);
-            setCityDestination(address.city);
-            setZipCodeDestination(address.zipCode);
+
+            if (address.street !== '') {
+                setStreetDestination(address.street);
+            }
+
+            if (address.number !== '') {
+                setNumberDestination(address.number);
+            }
+
+            if (address.neighborhood !== '') {
+                setNeighborhoodDestination(address.neighborhood);
+            }
+
+            if (address.city !== '') {
+                setCityDestination(address.city);
+            }
+
+            if (address.zipCode !== '') {
+                setZipCodeDestination(address.zipCode);
+            }
         }
     }
 
@@ -93,10 +123,22 @@ function DeliveryForm() {
 
         if (zipCode.length === 8) {
             const address = await ViaCepApiService.find(zipCode);
-            setStreetDeparture(address.street);
-            setNeighborhoodDeparture(address.neighborhood);
-            setCityDeparture(address.city);
-            setZipCodeDeparture(address.zipCode);
+
+            if (address.street !== '') {
+                setStreetDeparture(address.street);
+            }
+
+            if (address.neighborhood !== '') {
+                setNeighborhoodDeparture(address.neighborhood);
+            }
+
+            if (address.city !== '') {
+                setCityDeparture(address.city);
+            }
+
+            if (address.zipCode !== '') {
+                setZipCodeDeparture(address.zipCode);
+            }
 
             findDepartureLocationByAddress();
         }
@@ -107,10 +149,22 @@ function DeliveryForm() {
 
         if (zipCode.length === 8) {
             const address = await ViaCepApiService.find(zipCode);
-            setStreetDestination(address.street);
-            setNeighborhoodDestination(address.neighborhood);
-            setCityDestination(address.city);
-            setZipCodeDestination(address.zipCode);
+
+            if (address.street !== '') {
+                setStreetDestination(address.street);
+            }
+
+            if (address.neighborhood !== '') {
+                setNeighborhoodDestination(address.neighborhood);
+            }
+
+            if (address.city !== '') {
+                setCityDestination(address.city);
+            }
+
+            if (address.zipCode !== '') {
+                setZipCodeDestination(address.zipCode);
+            }
 
             findDestinationLocationByAddress();
         }
