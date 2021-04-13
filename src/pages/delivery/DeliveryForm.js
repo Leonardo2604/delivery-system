@@ -123,24 +123,35 @@ function DeliveryForm() {
 
         if (zipCode.length === 8) {
             const address = await ViaCepApiService.find(zipCode);
+            let street = streetDeparture;
+            let city = cityDeparture;
+            let neighborhood = neighborhoodDeparture;
 
             if (address.street !== '') {
                 setStreetDeparture(address.street);
+                street = address.street;
             }
 
             if (address.neighborhood !== '') {
                 setNeighborhoodDeparture(address.neighborhood);
+                neighborhood = address.neighborhood;
             }
 
             if (address.city !== '') {
                 setCityDeparture(address.city);
+                city = address.city;
             }
 
-            if (address.zipCode !== '') {
-                setZipCodeDeparture(address.zipCode);
-            }
+            if (street !== '' && city !== '' && neighborhood !== '') {
+                const location = await GoogleMapsApiService.fromAddress(googleMapsApiKey, {
+                    street,
+                    city,
+                    neighborhood
+                });
 
-            findDepartureLocationByAddress();
+                setLatitudeDeparture(location.latitude);
+                setLongitudeDeparture(location.longitude);
+            }
         }
     }
 
@@ -149,24 +160,35 @@ function DeliveryForm() {
 
         if (zipCode.length === 8) {
             const address = await ViaCepApiService.find(zipCode);
+            let street = streetDestination;
+            let city = cityDestination;
+            let neighborhood = neighborhoodDestination;
 
             if (address.street !== '') {
                 setStreetDestination(address.street);
+                street = address.street;
             }
 
             if (address.neighborhood !== '') {
                 setNeighborhoodDestination(address.neighborhood);
+                neighborhood = address.neighborhood;
             }
 
             if (address.city !== '') {
                 setCityDestination(address.city);
+                city = address.city;
             }
 
-            if (address.zipCode !== '') {
-                setZipCodeDestination(address.zipCode);
-            }
+            if (street !== '' && city !== '' && neighborhood !== '') {
+                const location = await GoogleMapsApiService.fromAddress(googleMapsApiKey, {
+                    street,
+                    city,
+                    neighborhood
+                });
 
-            findDestinationLocationByAddress();
+                setLatitudeDestination(location.latitude);
+                setLongitudeDestination(location.longitude);
+            }
         }
     }
 
